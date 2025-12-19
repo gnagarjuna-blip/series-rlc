@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BEE/IEE Interactive Q&A</title>
+    <title>BEE/IEE Part-A Q&A</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f9;
@@ -17,16 +17,16 @@
             margin: 20px auto;
             padding: 20px;
             background-color: #fff;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
         }
         header {
             text-align: center;
             padding-bottom: 10px;
-            border-bottom: 3px solid #007bff;
+            border-bottom: 2px solid #007bff;
             margin-bottom: 20px;
         }
-        header h1 { color: #007bff; margin: 0; }
+        header h1 { color: #007bff; }
 
         .qa-section {
             margin-bottom: 30px;
@@ -36,56 +36,42 @@
             background-color: #fafafa;
         }
 
-        /* Numerical Problem Styles */
-        .problem-card {
-            background: #fff;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 5px solid #28a745;
-        }
-        .button-group {
+        /* Numerical Problem Button Styles */
+        .btn-group {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             margin: 15px 0;
         }
         .step-btn {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
             background-color: #007bff;
             color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
-            transition: background 0.3s;
             flex: 1;
             min-width: 120px;
         }
         .step-btn:hover { background-color: #0056b3; }
-        .step-btn.active { background-color: #28a745; }
-
-        .content-box {
-            display: none; /* Hidden by default */
+        
+        /* Hidden content sections */
+        .step-content {
+            display: none;
             padding: 15px;
-            margin-top: 10px;
-            border: 1px dashed #ccc;
-            background-color: #f9f9f9;
-            border-radius: 4px;
-            line-height: 1.6;
+            margin-top: 5px;
+            background-color: #fff;
+            border-left: 4px solid #28a745;
+            border-bottom: 1px solid #eee;
+            line-height: 1.8;
         }
+        .active-content { display: block; }
 
-        .show { display: block; animation: fadeIn 0.5s; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Existing details styles */
+        /* General Q&A styles */
         details { border: 1px solid #eee; margin-bottom: 10px; border-radius: 4px; }
         summary { padding: 15px; font-weight: bold; cursor: pointer; background-color: #e9f5ff; }
         details[open] summary { background-color: #007bff; color: white; }
-        .answer-content { padding: 15px; background-color: #fff; }
     </style>
 </head>
 <body>
@@ -93,90 +79,71 @@
 <div class="container">
     <header>
         <h1>BEE/IEE Interactive Q&A</h1>
-        <p>Numerical Problem Solving Guide</p>
+        <p>Numerical Problem Solving</p>
     </header>
 
     <div class="qa-section">
-        <h2>Part-B: Numerical Problems</h2>
-        
-        <div class="problem-card">
-            <p><strong>Question:</strong> A series circuit has $R = 10 \, \Omega$, $L = 0.1 \, \text{H}$, and $C = 100 \, \mu\text{F}$. Calculate the impedance and the power factor when connected to a $230 \, \text{V}$, $50 \, \text{Hz}$ AC supply.</p>
+        <h2>Numerical Problem</h2>
+        <p><strong>1.</strong> A series circuit has R = 10 &Omega;, L = 0.1 H, and C = 100 &mu;F. Calculate the impedance and the power factor when connected to a 230 V, 50 Hz AC supply.</p>
 
-            <div class="button-group">
-                <button class="step-btn" onclick="toggleStep('given')">1. Given Data</button>
-                <button class="step-btn" onclick="toggleStep('required')">2. Required Data</button>
-                <button class="step-btn" onclick="toggleStep('formula')">3. Formulas</button>
-                <button class="step-btn" onclick="toggleStep('solution')">4. Solution</button>
-            </div>
+        <div class="btn-group">
+            <button class="step-btn" onclick="toggleStep('givenData')">Given Data</button>
+            <button class="step-btn" onclick="toggleStep('requiredData')">Required Data</button>
+            <button class="step-btn" onclick="toggleStep('formulas')">Formulas</button>
+            <button class="step-btn" onclick="toggleStep('solution')">Solution</button>
+        </div>
 
-            <div id="given" class="content-box">
-                <strong>Given Parameters:</strong><br>
-                * Resistance ($R$) = $10 \, \Omega$<br>
-                * Inductance ($L$) = $0.1 \, \text{H}$<br>
-                * Capacitance ($C$) = $100 \, \mu\text{F} = 100 \times 10^{-6} \, \text{F}$<br>
-                * Supply Voltage ($V$) = $230 \, \text{V}$<br>
-                * Frequency ($f$) = $50 \, \text{Hz}$
-            </div>
+        <div id="givenData" class="step-content">
+            <strong>Given Data:</strong><br>
+            R = 10 &Omega;<br>
+            L = 0.1 H<br>
+            C = 100 &mu;F = 100 &times; 10<sup>-6</sup> F<br>
+            V = 230 V<br>
+            f = 50 Hz
+        </div>
 
-            <div id="required" class="content-box">
-                <strong>Objective:</strong><br>
-                1. Total Impedance ($Z$) = ?<br>
-                2. Power Factor ($\cos \phi$) = ?
-            </div>
+        <div id="requiredData" class="step-content">
+            <strong>Required Data:</strong><br>
+            Impedance Z = ?<br>
+            Power Factor cos&phi; = ?
+        </div>
 
-            <div id="formula" class="content-box">
-                <strong>Mathematical Formulas:</strong><br>
-                * Inductive Reactance: $X_L = 2\pi f L$<br>
-                * Capacitive Reactance: $X_C = \frac{1}{2\pi f C}$<br>
-                * Total Impedance: $Z = \sqrt{R^2 + (X_L - X_C)^2}$<br>
-                * Power Factor: $\cos \phi = \frac{R}{Z}$
-            </div>
+        <div id="formulas" class="step-content">
+            <strong>Formulas:</strong><br>
+            Inductive Reactance: X<sub>L</sub> = 2&pi;fL<br>
+            Capacitive Reactance: X<sub>C</sub> = 1 / (2&pi;fC)<br>
+            Impedance: Z = &radic;(R<sup>2</sup> + (X<sub>L</sub> - X<sub>C</sub>)<sup>2</sup>)<br>
+            Power Factor: cos&phi; = R / Z
+        </div>
 
-            <div id="solution" class="content-box">
-                <strong>Step-by-Step Calculation:</strong><br>
-                <strong>A: Inductive Reactance ($X_L$)</strong><br>
-                $X_L = 2 \times 3.141 \times 50 \times 0.1 = 31.41 \, \Omega$<br><br>
-                
-                <strong>B: Capacitive Reactance ($X_C$)</strong><br>
-                $X_C = \frac{1}{2 \times 3.141 \times 50 \times 100 \times 10^{-6}} = 31.83 \, \Omega$<br><br>
-                
-                <strong>C: Total Impedance ($Z$)</strong><br>
-                $Z = \sqrt{10^2 + (31.41 - 31.83)^2}$<br>
-                $Z = \sqrt{100 + (-0.42)^2} = \sqrt{100.176} \approx 10.01 \, \Omega$<br><br>
-                
-                <strong>D: Power Factor ($\cos \phi$)</strong><br>
-                $\cos \phi = \frac{10}{10.01} \approx 0.999$<br>
-                <em>Note: Since $X_C > X_L$, the circuit is slightly capacitive (Leading PF).</em>
-            </div>
+        <div id="solution" class="step-content">
+            <strong>Solution:</strong><br>
+            <strong>A: Inductive Reactance (X<sub>L</sub>)</strong><br>
+            X<sub>L</sub> = 2 &times; 3.1416 &times; 50 &times; 0.1 = 31.42 &Omega;<br><br>
+            
+            <strong>B: Capacitive Reactance (X<sub>C</sub>)</strong><br>
+            X<sub>C</sub> = 1 / (2 &times; 3.1416 &times; 50 &times; 100 &times; 10<sup>-6</sup>) = 31.83 &Omega;<br><br>
+            
+            <strong>C: Total Impedance (Z)</strong><br>
+            Since X<sub>C</sub> > X<sub>L</sub>,<br>
+            Difference = X<sub>C</sub> - X<sub>L</sub> = 31.83 - 31.42 = 0.41 &Omega;<br>
+            Z = &radic;(10<sup>2</sup> + 0.41<sup>2</sup>) = 10.01 &Omega;<br><br>
+            
+            <strong>D: Calculate Power Factor (cos&phi;)</strong><br>
+            cos&phi; = 10 / 10.01 &approx; 0.999<br>
+            <em>Note: Because X<sub>C</sub> is slightly greater than X<sub>L</sub>, the power factor is leading.</em>
         </div>
     </div>
-
-    <div class="qa-section">
-        <h2>Part-A Short Answer Questions</h2>
-        <details>
-            <summary>1.a) What is an ideal voltage source?</summary>
-            <div class="answer-content">
-                <p>An ideal voltage source is a two-terminal source whose voltage remains <strong>constant regardless of the current drawn</strong>. It has <strong>zero internal resistance</strong> ($R_i = 0$).</p>
-            </div>
-        </details>
-    </div>
-
 </div>
 
 <script>
-    function toggleStep(stepId) {
-        // Get the specific element
-        var content = document.getElementById(stepId);
-        
-        // Toggle the 'show' class
-        if (content.classList.contains('show')) {
-            content.classList.remove('show');
+    function toggleStep(id) {
+        const element = document.getElementById(id);
+        if (element.style.display === "block") {
+            element.style.display = "none";
         } else {
-            content.classList.add('show');
+            element.style.display = "block";
         }
-        
-        // Optional: Highlight the button when active
-        event.currentTarget.classList.toggle('active');
     }
 </script>
 
